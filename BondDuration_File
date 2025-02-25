@@ -1,9 +1,25 @@
+def getBondPrice(y, face, couponRate, m, ppy=1):
+    coupon = face * couponRate / ppy
+    total_periods = m * ppy
+    discount_rate = y / ppy
+    price = sum(coupon / (1 + discount_rate)**t for t in range(1, total_periods + 1))
+    price += face / (1 + discount_rate)**total_periods
+    return price
+
 def getBondDuration(y, face, couponRate, m, ppy=1):
     coupon = face * couponRate / ppy  
     total_periods = m * ppy 
     discount_rate = y / ppy  
+    coupon = face * couponRate / ppy
+    total_periods = m * ppy
+    discount_rate = y / ppy
     bondPrice = getBondPrice(y, face, couponRate, m, ppy)
-    duration = sum((t * coupon / (1 + discount_rate) ** t) for t in range(1, total_periods + 1))
-    duration += total_periods * (face / (1 + discount_rate) ** total_periods)
+    duration = sum((t / ppy * coupon / (1 + discount_rate) ** t) for t in range(1, total_periods + 1))
+    duration += total_periods / ppy * (face / (1 + discount_rate) ** total_periods)
     duration /= bondPrice
     return duration
+    mac_duration = sum(t * coupon / (1 + discount_rate)**t for t in range(1, total_periods + 1))
+    mac_duration += total_periods * face / (1 + discount_rate)**total_periods
+    mac_duration /= bondPrice
+    mac_duration /= ppy  
+    return mac_duration
