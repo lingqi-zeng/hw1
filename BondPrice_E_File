@@ -1,0 +1,6 @@
+def getBondPrice_E(face, couponRate, m, yc):
+    coupon = face * couponRate  
+    total_periods = m  
+    bondPrice = sum(coupon / (1 + yc[t]) ** (t + 1) for t in range(total_periods))
+    bondPrice += face / (1 + yc[-1]) ** total_periods  
+    return bondPrice
