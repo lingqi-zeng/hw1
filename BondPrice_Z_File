@@ -1,0 +1,5 @@
+def getBondPrice_Z(face, couponRate, times, yc):
+    coupon = face * couponRate 
+    bondPrice = sum(coupon / (1 + rate) ** time for time, rate in zip(times, yc))
+    bondPrice += face / (1 + yc[-1]) ** times[-1]  
+    return bondPrice
