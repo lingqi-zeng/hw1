@@ -1,6 +1,10 @@
-def getBondPrice_E(face, couponRate, m, yc):
-    coupon = face * couponRate  
-    total_periods = m  
-    bondPrice = sum(coupon / (1 + yc[t]) ** (t + 1) for t in range(total_periods))
-    bondPrice += face / (1 + yc[-1]) ** total_periods  
+def getBondPrice_E(face, couponRate, yc):
+    coupon = face * couponRate
+    bondPrice = 0.0
+    for t, rate in enumerate(yc, 1):  # t starts at 1 for each year
+    if t == len(yc):
+    cf = coupon + face
+    else:
+    cf = coupon
+    bondPrice += cf / ((1 + rate) ** t)
     return bondPrice
